@@ -33,7 +33,7 @@
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss"
             ],
-            "scripts": ["src/assets/plotly-2.14.0.min.js"]
+            "scripts": []
           },
           "configurations": {
             "production": {
