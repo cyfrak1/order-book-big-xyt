@@ -1,7 +1,11 @@
-<div class="chart-ui">
+<div
+  class="chart-ui"
+  data-step="5"
+  data-intro="If you enjoyed this tutorial and appreciate the quality of my work, I'd be grateful for the opportunity to join your team. Feel free to reach out if you're looking to hire a passionate and dedicated developer."
+>
   <div class="controls">
     <mat-form-field
-      id="step2"
+      data-step="2"
       data-intro="Select a Timestamp
     Use the dropdown menu to choose a specific time snapshot from the list. The chart will update instantly."
       appearance="outline"
@@ -19,6 +23,7 @@
       <mat-slider
         class="replay-slider"
         id="step3"
+        data-step="3"
         data-intro="Scrub the Slider
         Drag the slider like a YouTube timeline to quickly jump between snapshots. You'll see the price levels update dynamically."
         [min]="0"
@@ -30,6 +35,7 @@
 
       <button
         id="step4"
+        data-step="4"
         data-intro="Click the ▶️ Replay button to automatically play through all snapshots. The chart and slider will move in sync. Then Hit the ■ Stop button anytime to pause the animation and take a closer look at a specific point."
         mat-raised-button
         (click)="isReplaying ? stopReplay() : startReplay()"
