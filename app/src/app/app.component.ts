@@ -4,6 +4,8 @@ import { ChartComponent } from './shared/components/chart/chart.component';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { isFirstAppUse } from './shared/utils/first-use';
+import introJs from 'intro.js';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +21,6 @@ export class AppComponent {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.getSampleData().subscribe((result) => {
       this.data = result;
     });

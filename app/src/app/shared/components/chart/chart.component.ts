@@ -25,6 +25,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { createCustomTooltip } from './custom-tooltip';
+import { isFirstAppUse } from '../../utils/first-use';
+import introJs from 'intro.js';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart & {
@@ -63,6 +65,12 @@ export class ChartComponent {
 
   @Input() set rawData(data: any[]) {
     this._rawData.set(data || []);
+  }
+
+  public ngOnInit(): void {
+    if (isFirstAppUse()) {
+      introJs().start();
+    }
   }
 
   protected rawDataTransformed = computed(() =>
