@@ -1,0 +1,25 @@
+.chart-ui {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .time-select {
+      min-width: 200px;
+    }
+
+    .replay-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .replay-slider {
+      width: 100%;
+    }
+  }
+}
