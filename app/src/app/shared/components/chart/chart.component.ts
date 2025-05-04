@@ -14,6 +14,7 @@ import {
   ApexDataLabels,
   ApexStroke,
   ApexTitleSubtitle,
+  ApexTooltip,
   ApexXAxis,
   ApexYAxis,
   NgApexchartsModule,
@@ -23,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
+import { createCustomTooltip } from './custom-tooltip';
 import { isFirstAppUse } from '../../utils/first-use';
 import introJs from 'intro.js';
 export type ChartOptions = {
@@ -37,6 +39,7 @@ export type ChartOptions = {
   dataLabels: ApexDataLabels;
   stroke: ApexStroke;
   title: ApexTitleSubtitle;
+  tooltip: ApexTooltip;
 };
 
 @Component({
@@ -118,6 +121,11 @@ export class ChartComponent {
     const spread = max - min || 0.01;
     const padding = spread * 0.2;
 
+    const tooltip = createCustomTooltip(
+      () => this.selectedTime(),
+      () => this.rawDataTransformed()
+    );
+
     if (this.chartRef) {
       this.chartRef.updateSeries(
         [
@@ -140,6 +148,7 @@ export class ChartComponent {
             text: `Order Book Snapshot at ${selected}`,
             align: 'center' as const,
           },
+          tooltip,
         },
         true,
         true
@@ -189,6 +198,7 @@ export class ChartComponent {
           title: { text: 'Price' },
           decimalsInFloat: 4,
         },
+        tooltip,
       });
     }
   });
