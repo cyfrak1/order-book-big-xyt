@@ -1,0 +1,42 @@
+<div class="chart-ui">
+  <div class="controls">
+    <mat-form-field appearance="outline" class="time-select">
+      <mat-label>Select Time</mat-label>
+      <mat-select [value]="selectedTime()" (valueChange)="onTimeChange($event)">
+        <mat-option *ngFor="let time of availableTimes()" [value]="time">
+          {{ time }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="replay-buttons">
+      <mat-slider
+        class="replay-slider"
+        [min]="0"
+        [max]="availableTimes().length - 1"
+        (input)="onSliderChange($event)"
+      >
+        <input matSliderThumb type="range" [value]="currentIndex" />
+      </mat-slider>
+
+      <button
+        mat-raised-button
+        (click)="isReplaying ? stopReplay() : startReplay()"
+      >
+        {{ isReplaying ? "■ Stop" : "▶ Replay" }}
+      </button>
+    </div>
+  </div>
+
+  <apx-chart
+    #chartRef
+    *ngIf="chartOptions() as options"
+    [series]="options.series!"
+    [chart]="options.chart!"
+    [xaxis]="options.xaxis!"
+    [yaxis]="options.yaxis!"
+    [dataLabels]="options.dataLabels!"
+    [stroke]="options.stroke!"
+    [title]="options.title!"
+  ></apx-chart>
+</div>
