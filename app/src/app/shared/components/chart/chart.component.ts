@@ -4,26 +4,27 @@ import {
   computed,
   effect,
   Input,
-  ViewChild,
   signal,
+  ViewChild,
 } from '@angular/core';
 import {
   ApexAxisChartSeries,
   ApexChart,
+  ChartComponent as ApexChartComponent,
   ApexDataLabels,
   ApexStroke,
   ApexTitleSubtitle,
   ApexXAxis,
   ApexYAxis,
   NgApexchartsModule,
-  ChartComponent as ApexChartComponent,
 } from 'ng-apexcharts';
 
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
+import { isFirstAppUse } from '../../utils/first-use';
+import introJs from 'intro.js';
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart & {
@@ -61,6 +62,12 @@ export class ChartComponent {
 
   @Input() set rawData(data: any[]) {
     this._rawData.set(data || []);
+  }
+
+  public ngOnInit(): void {
+    if (isFirstAppUse()) {
+      introJs().start();
+    }
   }
 
   protected rawDataTransformed = computed(() =>
